@@ -7,8 +7,11 @@ function dd(...$dump)
   die();
 }
 
-function view($view)
+function view($view, $data = [])
 {
+  foreach ($data as $key => $value) {
+    $$key = $value;
+  }
   require "views/template/app.php";
 }
 
@@ -16,6 +19,5 @@ function abort($code)
 {
   http_response_code($code);
   view($code);
-  require "views/$code.view.php";
   die();
 }
